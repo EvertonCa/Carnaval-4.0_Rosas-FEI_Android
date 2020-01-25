@@ -4,7 +4,7 @@
         "samples": [
             {
                 "name": "Sambódromo",
-                "path": "05_InstantTracking_2_3dModelOnPlane/index.html",
+                "path": "Sambodromo/index.html",
                 "requiredFeatures": [
                     "geo"
                 ],
@@ -14,9 +14,9 @@
             },
             {
                 "name": "Casa",
-                "path": "05_InstantTracking_2_3dModelOnPlane/index.html",
+                "path": "Casa/index.html",
                 "requiredFeatures": [
-                    "geo"
+                    "instant_tracking"
                 ],
                 "startupConfiguration": {
                     "camera_position": "back"
