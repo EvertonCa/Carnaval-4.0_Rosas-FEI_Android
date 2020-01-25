@@ -8,19 +8,16 @@ import com.wikitude.samples.util.PermissionUtil;
 import com.wikitude.samples.util.SampleCategory;
 import com.wikitude.samples.util.SampleData;
 import com.wikitude.samples.util.SampleJsonParser;
-import com.wikitude.samples.util.adapters.SamplesExpendableListAdapter;
 import com.wikitude.samples.util.urllauncher.UrlLauncherStorageActivity;
 import com.wikitude.sdksamples.R;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
     private static final int EXPANDABLE_INDICATOR_END_OFFSET = 30;
 
     private final PermissionManager permissionManager = ArchitectView.getPermissionManager();
-    private ImageView modelView;
+    private ImageView sambodromoView;
+    private ImageView casaView;
     private List<SampleCategory> categories;
 
     @Override
@@ -64,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
             }
         }
 
-        modelView = findViewById(R.id.modelPreview);
+        sambodromoView = findViewById(R.id.sambodromoPreview);
+        casaView = findViewById(R.id.casaPreview);
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,7 +77,17 @@ public class MainActivity extends AppCompatActivity implements ExpandableListVie
 
     public boolean onClick(View v)
     {
-        final SampleData sampleData = categories.get(0).getSamples().get(0);
+        int index = 0;
+        switch (v.getId()){
+            case (R.id.sambodromoPreview):
+                index = 0;
+                break;
+            case (R.id.casaPreview):
+                index = 1;
+                break;
+        }
+
+        final SampleData sampleData = categories.get(0).getSamples().get(index);
         final String[] permissions = PermissionUtil.getPermissionsForArFeatures(sampleData.getArFeatures());
 
         if(!sampleData.getIsDeviceSupporting()) {

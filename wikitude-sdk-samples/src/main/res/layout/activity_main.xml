@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ImageView
-            android:id="@+id/modelPreview"
+            android:id="@+id/sambodromoPreview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,8 +37,16 @@
             android:contentDescription="Model Preview"
             android:cropToPadding="false"
             android:onClick="onClick"
-            android:scaleType="centerCrop"
+            android:scaleType="center"
             app:srcCompat="@drawable/model" />
+
+        <ImageView
+            android:id="@+id/casaPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            app:srcCompat="@drawable/model_old" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
