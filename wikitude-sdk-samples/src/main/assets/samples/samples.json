@@ -1,0 +1,27 @@
+[
+    {
+        "category_name": "Experiências",
+        "samples": [
+            {
+                "name": "Sambódromo",
+                "path": "05_InstantTracking_2_3dModelOnPlane/index.html",
+                "requiredFeatures": [
+                    "geo"
+                ],
+                "startupConfiguration": {
+                    "camera_position": "back"
+                }
+            },
+            {
+                "name": "Casa",
+                "path": "05_InstantTracking_2_3dModelOnPlane/index.html",
+                "requiredFeatures": [
+                    "geo"
+                ],
+                "startupConfiguration": {
+                    "camera_position": "back"
+                }
+            }
+        ]
+    }
+]
