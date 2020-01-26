@@ -97,7 +97,9 @@ public class SimpleGeoArActivity extends SimpleArActivity implements LocationLis
      */
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(SimpleGeoArActivity.this, String.valueOf(location.getLatitude()) + " and " + String.valueOf(location.getLongitude()), Toast.LENGTH_LONG ).show();
+        Toast.makeText(SimpleGeoArActivity.this, "Latitude: " +
+                String.valueOf(location.getLatitude()) + " Longitude: " +
+                String.valueOf(location.getLongitude()), Toast.LENGTH_LONG ).show();
         float accuracy = location.hasAccuracy() ? location.getAccuracy() : 1000;
         if (location.hasAltitude()) {
             architectView.setLocation(location.getLatitude(), location.getLongitude(), location.getAltitude(), accuracy);

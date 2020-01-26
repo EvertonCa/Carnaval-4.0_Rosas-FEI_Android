@@ -30,14 +30,13 @@
 
         <ImageView
             android:id="@+id/sambodromoPreview"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:contentDescription="Model Preview"
             android:cropToPadding="false"
             android:onClick="onClick"
-            android:scaleType="center"
             app:srcCompat="@drawable/model" />
 
         <ImageView

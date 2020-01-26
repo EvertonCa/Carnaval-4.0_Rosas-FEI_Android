@@ -8,6 +8,7 @@ var World = {
 
     init: function initFn() {
         AR.context.onLocationChanged = World.locationChanged;
+        World.worldLoaded();
     },
 
     locationChanged: function locationChangedFn(lat, lon, alt, acc) {
@@ -68,10 +69,11 @@ var World = {
             drawables: {
                 cam: [model],
                 indicator: [indicatorDrawable]
-            },
-            onDragChanged: function(relativeX, relativeY, intersectionX, intersectionY) {
-                this.translate = {x:intersectionX, y:intersectionY}}
+            }
         });
+
+        geoObject.onDragChanged: function(xNormalized, yNormalized) {
+                                    this.translate = {x:intersectionX, y:intersectionY}}
     },
 
     onError: function onErrorFn(error) {
