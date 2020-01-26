@@ -5,19 +5,16 @@ var World = {
     used: false,
     animation: null,
     modelSound: null,
+    angleModel: 0,
+    model: null,
+    translateX: 0,
+    translateZ: 0,
 
     init: function initFn() {
-        AR.context.onLocationChanged = World.locationChanged;
         World.worldLoaded();
     },
 
     locationChanged: function locationChangedFn(lat, lon, alt, acc) {
-        /*
-            The custom function World.onLocationChanged checks with the flag World.initiallyLoadedData if the
-            function was already called. With the first call of World.onLocationChanged an object that contains geo
-            information will be created which will be later used to create a marker using the
-            World.loadPoisFromJsonData function.
-        */
         if (!World.used){
             World.latitude = lat;
             World.longitude = lon;
@@ -31,11 +28,11 @@ var World = {
             the user.
         */
         var userLocation = new AR.GeoLocation(World.latitude, World.longitude, World.altitude);
-        var modelLocation = new AR.RelativeLocation(userLocation, 2, 0, -2);
+        var modelLocation = new AR.RelativeLocation(userLocation, -2, 0, -2);
         World.used = true;
 
         /* Next the model object is loaded. */
-        var model = new AR.Model("assets/models/carro_robo.wt3", {
+        World.model = new AR.Model("assets/models/carro_robo.wt3", {
             onLoaded: this.worldLoaded,
             onError: World.onError,
             scale: {
@@ -45,7 +42,7 @@ var World = {
             }
         });
 
-        World.animation = new AR.ModelAnimation(model, "Base_carro|Carro Andando_Base_carro_animation");
+        World.animation = new AR.ModelAnimation(World.model, "Base_carro|Carro Andando_Base_carro_animation");
 
         World.modelSound = new AR.Sound("assets/sounds/rosas.wav", {
             onError : function(){
@@ -67,17 +64,45 @@ var World = {
         /* Putting it all together the location and 3D model is added to an AR.GeoObject. */
         this.geoObject = new AR.GeoObject(modelLocation, {
             drawables: {
-                cam: [model],
+                cam: [World.model],
                 indicator: [indicatorDrawable]
             }
         });
 
-        geoObject.onDragChanged: function(xNormalized, yNormalized) {
-                                    this.translate = {x:intersectionX, y:intersectionY}}
+        this.geoObject.onDragChanged = function(xNormalized, yNormalized) {
+                                            World.translateX = World.translateX + xNormalized;
+                                            World.translateZ = World.translateZ + yNormalized;
+                                            World.model.translate.x = - World.translateX * 0.5;
+                                            World.model.translate.z = - World.translateZ * 0.5;
+                                        };
     },
 
     onError: function onErrorFn(error) {
         alert(error);
+    },
+
+    changeObjectAngle: function changeObjectAngleFn(angle) {
+        World.angleModel = parseFloat(angle);
+        World.model.rotate.y = World.angleModel;
+    },
+
+    changeTrackingHeight: function changeTrackingHeightFn(height) {
+        World.model.translate.y = parseFloat(-height);
+    },
+
+    move: function moveFn(id){
+        if(id == "north-button"){
+            alert("NORTE");
+        }
+        else if(id == "south-button"){
+            alert("SUL");
+        }
+        else if(id == "east-button"){
+            alert("LESTE");
+        }
+        else{
+            alert("OESTE");
+        }
     },
 
     worldLoaded: function worldLoadedFn() {
@@ -105,3 +130,4 @@ var World = {
 };
 
 World.init();
+AR.context.onLocationChanged = World.locationChanged;
