@@ -90,21 +90,6 @@ var World = {
         World.model.translate.y = parseFloat(-height);
     },
 
-    move: function moveFn(id){
-        if(id == "north-button"){
-            alert("NORTE");
-        }
-        else if(id == "south-button"){
-            alert("SUL");
-        }
-        else if(id == "east-button"){
-            alert("LESTE");
-        }
-        else{
-            alert("OESTE");
-        }
-    },
-
     worldLoaded: function worldLoadedFn() {
         document.getElementById("loadingMessage").style.display = "none";
     },
