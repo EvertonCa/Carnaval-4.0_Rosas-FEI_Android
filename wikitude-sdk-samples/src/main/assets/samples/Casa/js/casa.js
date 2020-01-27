@@ -18,9 +18,9 @@ var World = {
     createARModel: function createARModelFn(xpos, ypos){
         this.arModel = new AR.Model("assets/models/carro_robo.wt3", {
             scale: {
-               x: 0.01,
-               y: 0.01,
-               z: 0.01
+               x: 0.02,
+               y: 0.02,
+               z: 0.02
             },
             translate: {
                x: xpos,
@@ -35,9 +35,9 @@ var World = {
             onError: World.onError
         });
 
-        this.animation = new AR.ModelAnimation(this.arModel, "Base_carro|Carro Andando_Base_carro_animation");
+        this.animation = new AR.ModelAnimation(this.arModel, "Plataforma01|Carro Andando_Plataforma01_animation");
 
-        this.resetAnimation = new AR.ModelAnimation(this.arModel, "Base_carro|Carro Parado_Base_carro_animation");
+        this.resetAnimation = new AR.ModelAnimation(this.arModel, "Plataforma01|Carro Parado_Plataforma01_animation");
 
         this.modelSound = new AR.Sound("assets/sounds/rosas.wav", {
             onError : function(){
