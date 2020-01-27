@@ -24,9 +24,9 @@ var World = {
 
     createModelAtLocation: function createModelAtLocationFn() {
         /*
-            First a location where the model should be displayed will be defined. This location will be relativ to
-            the user.
+            Coordenadas sambodromo: Lat = -23.516252, Long = -46.643670
         */
+        // var sambodromoLocation = new AR.GeoLocation(-23.516252, -46.643670);
         var userLocation = new AR.GeoLocation(World.latitude, World.longitude, World.altitude);
         var modelLocation = new AR.RelativeLocation(userLocation, -2, 0, -2);
         World.used = true;
