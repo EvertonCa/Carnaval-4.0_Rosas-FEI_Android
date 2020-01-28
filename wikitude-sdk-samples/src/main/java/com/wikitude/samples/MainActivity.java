@@ -16,12 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -43,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        this.getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
         final String json = SampleJsonParser.loadStringFromAssets(this, sampleDefinitionsPath);
         categories = SampleJsonParser.getCategoriesFromJsonString(json);
 
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override public void run() {
                 startAR();
             }
-        }, 5000);
+        }, 1000);
     }
 
     public boolean startAR()

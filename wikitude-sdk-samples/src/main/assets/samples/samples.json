@@ -3,8 +3,8 @@
         "category_name": "Experiências",
         "samples": [
             {
-                "name": "Casa",
-                "path": "Casa/index.html",
+                "name": "Animado",
+                "path": "Animado/index.html",
                 "requiredFeatures": [
                     "instant_tracking"
                 ],
