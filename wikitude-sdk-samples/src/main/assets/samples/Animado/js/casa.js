@@ -12,6 +12,7 @@ var World = {
     animationStarted: false,
     arModel: null,
     selectedCar: null,
+    resetedModels: false,
 
     init: function initFn() {
         AR.hardware.smart.isPlatformAssistedTrackingSupported();
@@ -37,6 +38,8 @@ var World = {
             onError: World.onError
         });
 
+        World.resetedModels = false;
+
         World.animation = new AR.ModelAnimation(this.arModel, animationName);
 
         World.resetAnimation = new AR.ModelAnimation(this.arModel, resetAnimationName);
@@ -52,7 +55,7 @@ var World = {
 
         World.resetAnimation.start();
         World.resetAnimation.stop();
-        World.resetAnimation.destroy();
+        World.resetAnimation = null;
     },
 
     createOverlays: function createOverlaysFn() {
@@ -204,11 +207,12 @@ var World = {
     },
 
     resetModels: function resetModelsFn() {
-        World.modelSound.stop();
-        World.animation.stop();
-        World.animation.destroy();
-        this.instantTrackable.drawables.removeCamDrawable(allCurrentModels);
-        allCurrentModels = [];
+        if (!World.resetedModels){
+            World.modelSound.stop();
+            this.instantTrackable.drawables.removeCamDrawable(allCurrentModels);
+            allCurrentModels = [];
+            World.resetedModels = true;
+        }
     },
 
     onError: function onErrorFn(error) {

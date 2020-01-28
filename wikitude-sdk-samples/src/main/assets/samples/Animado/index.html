@@ -49,16 +49,16 @@
         <input id="fecha-alas-button" class="car-button" type="image" src="assets/buttons/fecha_alas.png"
                onclick="World.changeTrackerState(id)"/>
         <div class="slider-delete-container">
-            <div id="angleMessage">Ângulo</div>
-            <div id="change-direction-slider-container">
+            <div id="angleMessage" style="visibility: hidden">Ângulo</div>
+            <div id="change-direction-slider-container" style="visibility: hidden">
                 <input id="change-direction-slider" type="range" min="0" value="0" max="360" step="1"
                        onchange="World.changeObjectAngle(value)">
             </div>
         </div>
         <input id="tracking-start-stop-button" class="image-button" type="image" src="assets/buttons/stop.png"
-               onclick="World.changeTrackerState(id)"/>
+               onclick="World.changeTrackerState(id)" style="visibility: hidden"/>
         <input id="animation-pause-resume-button" class="image-button" type="image" src="assets/buttons/start.png"
-               onclick="World.pauseOrResume()"/>
+               onclick="World.pauseOrResume()" style="visibility: hidden"/>
     </div>
 </div>
 
