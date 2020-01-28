@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override public void run() {
                 startAR();
             }
-        }, 1000);
+        }, 3000);
     }
 
     public boolean startAR()

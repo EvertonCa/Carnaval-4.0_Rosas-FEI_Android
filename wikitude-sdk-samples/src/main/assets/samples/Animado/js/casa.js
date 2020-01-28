@@ -11,13 +11,14 @@ var World = {
     modelSound: null,
     animationStarted: false,
     arModel: null,
+    selectedCar: null,
 
     init: function initFn() {
         AR.hardware.smart.isPlatformAssistedTrackingSupported();
     },
 
-    createARModel: function createARModelFn(xpos, ypos){
-        World.arModel = new AR.Model("assets/models/model.wt3", {
+    createARModel: function createARModelFn(xpos, ypos, name, animationName, resetAnimationName){
+        World.arModel = new AR.Model(name, {
             scale: {
                x: 0.01,
                y: 0.01,
@@ -36,9 +37,9 @@ var World = {
             onError: World.onError
         });
 
-        World.animation = new AR.ModelAnimation(this.arModel, "Plataforma01|Carro Andando_Plataforma01_animation");
+        World.animation = new AR.ModelAnimation(this.arModel, animationName);
 
-        World.resetAnimation = new AR.ModelAnimation(this.arModel, "Plataforma01|Carro Parado_Plataforma01_animation");
+        World.resetAnimation = new AR.ModelAnimation(this.arModel, resetAnimationName);
 
         World.modelSound = new AR.Sound("assets/sounds/rosas.mp3", {
             onError : function(){
@@ -80,14 +81,22 @@ var World = {
             smartEnabled: false,
             onChangedState: function onChangedStateFn(state) {
                 if (state === AR.InstantTrackerState.INITIALIZING) {
-                    document.getElementById("tracking-start-stop-button").src = "assets/buttons/start.png";
+                    document.getElementById("tracking-start-stop-button").style.visibility = "hidden";
                     document.getElementById("tracking-height-slider-container").style.visibility = "visible";
+                    document.getElementById("distanceMessage").style.visibility = "visible";
+                    document.getElementById("abre-alas-button").style.visibility = "visible";
+                    document.getElementById("fecha-alas-button").style.visibility = "visible";
                     document.getElementById("change-direction-slider-container").style.visibility = "hidden";
+                    document.getElementById("angleMessage").style.visibility = "hidden";
                     document.getElementById("animation-pause-resume-button").style.visibility = "hidden";
                 } else{
-                    document.getElementById("tracking-start-stop-button").src = "assets/buttons/stop.png";
+                    document.getElementById("tracking-start-stop-button").style.visibility = "visible";
+                    document.getElementById("abre-alas-button").style.visibility = "hidden";
+                    document.getElementById("fecha-alas-button").style.visibility = "hidden";
                     document.getElementById("tracking-height-slider-container").style.visibility = "hidden";
+                    document.getElementById("distanceMessage").style.visibility = "hidden";
                     document.getElementById("change-direction-slider-container").style.visibility = "visible";
+                    document.getElementById("angleMessage").style.visibility = "visible";
                     document.getElementById("animation-pause-resume-button").style.visibility = "visible";
                 }
             },
@@ -107,7 +116,15 @@ var World = {
             },
             onTrackingStarted: function onTrackingStartedFn() {
                 /* Do something when tracking is started (recognized). */
-                World.createARModel(0.0, 0.0);
+                if (World.selectedCar == "abre_alas"){
+                    World.createARModel(0.0, 0.0, "assets/models/abre_alas.wt3",
+                    "Plataforma01|Carro Andando_Plataforma01_animation",
+                    "Plataforma01|Carro Parado_Plataforma01_animation");
+                }else{
+                    World.createARModel(0.0, 0.0, "assets/models/fecha_alas.wt3",
+                    "Base_carro|Carro Andando_Base_carro_animation",
+                    "Base_carro|Carro Parado_Base_carro_animation");
+                }
                 World.addModel();
                 document.getElementById("animation-pause-resume-button").src = "assets/buttons/start.png";
                 World.showUserInstructions("Pressionando o play, o carro começará a andar! Você pode o acompanhar, movendo suavemente o seu dispositivo!");
@@ -135,7 +152,13 @@ var World = {
         );
     },
 
-    changeTrackerState: function changeTrackerStateFn() {
+    changeTrackerState: function changeTrackerStateFn(id) {
+        if (id == "abre-alas-button"){
+            World.selectedCar = "abre_alas";
+        }else{
+            World.selectedCar = "fecha_alas";
+        }
+
         if (this.tracker.state === AR.InstantTrackerState.INITIALIZING) {
             this.tracker.state = AR.InstantTrackerState.TRACKING;
 
@@ -184,7 +207,6 @@ var World = {
         World.modelSound.stop();
         World.animation.stop();
         World.animation.destroy();
-        World.arModel.destroy();
         this.instantTrackable.drawables.removeCamDrawable(allCurrentModels);
         allCurrentModels = [];
     },

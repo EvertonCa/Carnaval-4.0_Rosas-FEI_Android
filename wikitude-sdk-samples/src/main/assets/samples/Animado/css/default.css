@@ -13,7 +13,7 @@ body {
 
 #tracking-height-slider-container {
     max-width: 500px;
-    width: 85%;
+    flex: 1;
 }
 
 #change-direction-slider-container {
@@ -22,6 +22,16 @@ body {
 }
 
 #angleMessage {
+    flex: 0 0 25%;
+    font-size: medium;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    opacity: 1;
+    display: table;
+}
+
+#distanceMessage {
     flex: 0 0 25%;
     font-size: medium;
     padding-top: 12px;
@@ -84,6 +94,10 @@ and (orientation: portrait) {
         max-width: 100px;
         max-height: 100px;
     }
+    .car-button {
+        max-width: 250px;
+        max-height: 250px;
+    }
 }
 
 @media only screen
@@ -92,6 +106,10 @@ and (orientation: landscape) {
     .image-button {
         max-width: 100px;
         max-height: 100px;
+    }
+    .car-button {
+        max-width: 250px;
+        max-height: 250px;
     }
 }
 
@@ -102,6 +120,10 @@ and (orientation: portrait) {
         max-width: 50px;
         max-height: 50px;
     }
+    .car-button {
+        max-width: 150px;
+        max-height: 150px;
+    }
 }
 
 @media only screen
@@ -110,5 +132,9 @@ and (orientation: landscape) {
     .image-button {
         max-width: 50px;
         max-height: 50px;
+    }
+    .car-button {
+        max-width: 150px;
+        max-height: 150px;
     }
 }
