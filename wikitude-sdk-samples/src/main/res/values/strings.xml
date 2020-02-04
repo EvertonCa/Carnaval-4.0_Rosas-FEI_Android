@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Alegorias FEI</string>
+    <string name="app_name">Carnaval 4.0 Rosas-FEI</string>
 
     <!-- Permission handling -->
-    <string name="permissions_denied">O Alegorias FEI necessita das seguintes permissões:</string>
-    <string name="permission_rationale_text">O Alegorias FEI necessita das seguintes permissões para permitir uma experiência de Realidade Aumentada:</string>
-    <string name="permission_rationale_title">Permissões Alegorias FEI</string>
+    <string name="permissions_denied">O Carnaval 4.0 necessita das seguintes permissões:</string>
+    <string name="permission_rationale_text">O Carnaval 4.0 necessita das seguintes permissões para permitir uma experiência de Realidade Aumentada:</string>
+    <string name="permission_rationale_title">Permissões Carnaval 4.0</string>
 
     <!-- Is device not supported -->
     <string name="device_missing_features">Dispositivo com recursos faltantes</string>
@@ -34,6 +34,8 @@
     <string name="url_launcher_settings_camera_resolution">Camera Resolution</string>
     <string name="url_launcher_settings_camera2_enabled">Camera 2 Enabled</string>
     <string name="url_launcher_settings_ok">OK</string>
+    <string name="todo">TODO</string>
+    <string name="splashImage">splashImage</string>
 
     <string-array name="url_launcher_settings_camera_positions">
         <item>Back</item>

@@ -17,6 +17,9 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -32,11 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
     private final PermissionManager permissionManager = ArchitectView.getPermissionManager();
     private List<SampleCategory> categories;
+    private ImageView splashImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        splashImageView = findViewById(R.id.splashImageView);
 
         this.getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -63,9 +68,61 @@ public class MainActivity extends AppCompatActivity {
         Handler handle = new Handler();
         handle.postDelayed(new Runnable() {
             @Override public void run() {
+                animateImage();
+                //startAR();
+            }
+        }, 2000);
+    }
+
+    public void animateImage()
+    {
+        // first 0f, 1f mean scaling from X-axis to X-axis, meaning scaling from 0-100%
+        // first 0f, 1f mean scaling from Y-axis to Y-axis, meaning scaling from 0-100%
+        // The two 0.5f mean animation will start from 50% of X-axis & 50% of Y-axis, i.e. from center
+
+        final ScaleAnimation fade_out =  new ScaleAnimation(1f, 10f, 1f, 10f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        fade_out.setDuration(700);     // animation duration in milliseconds
+        fade_out.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        final ScaleAnimation fade_in =  new ScaleAnimation(1f, 0.5f, 1f, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        fade_in.setDuration(400);     // animation duration in milliseconds
+        fade_in.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        splashImageView.startAnimation(fade_in);
+
+        fade_in.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                splashImageView.startAnimation(fade_out);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
+
+        fade_out.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
                 startAR();
             }
-        }, 3000);
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
     }
 
     public boolean startAR()
