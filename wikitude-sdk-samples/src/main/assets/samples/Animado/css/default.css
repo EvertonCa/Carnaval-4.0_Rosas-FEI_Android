@@ -84,15 +84,15 @@ body {
 }
 
 .image-button {
-    width: 14%;
+    width: 25%;
 }
 
 @media only screen
 and (min-device-width: 640px)
 and (orientation: portrait) {
     .image-button {
-        max-width: 100px;
-        max-height: 100px;
+        max-width: 300px;
+        max-height: 150px;
     }
     .car-button {
         max-width: 250px;
@@ -104,8 +104,8 @@ and (orientation: portrait) {
 and (min-device-width: 720px)
 and (orientation: landscape) {
     .image-button {
-        max-width: 100px;
-        max-height: 100px;
+        max-width: 300px;
+        max-height: 150px;
     }
     .car-button {
         max-width: 250px;
@@ -117,8 +117,8 @@ and (orientation: landscape) {
 and (max-device-width: 640px)
 and (orientation: portrait) {
     .image-button {
-        max-width: 50px;
-        max-height: 50px;
+        max-width: 150px;
+        max-height: 75px;
     }
     .car-button {
         max-width: 150px;
@@ -130,8 +130,8 @@ and (orientation: portrait) {
 and (max-device-width: 720px)
 and (orientation: landscape) {
     .image-button {
-        max-width: 50px;
-        max-height: 50px;
+        max-width: 150px;
+        max-height: 75px;
     }
     .car-button {
         max-width: 150px;

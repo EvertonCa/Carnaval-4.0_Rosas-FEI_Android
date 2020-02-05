@@ -8,6 +8,7 @@ var World = {
     angleModel: 0.0,
     animation: null,
     resetAnimation: null,
+    circleAnimation: null,
     modelSound: null,
     animationStarted: false,
     arModel: null,
@@ -18,7 +19,7 @@ var World = {
         AR.hardware.smart.isPlatformAssistedTrackingSupported();
     },
 
-    createARModel: function createARModelFn(xpos, ypos, name, animationName, resetAnimationName){
+    createARModel: function createARModelFn(xpos, ypos, name, animationName, resetAnimationName, circleAnimationName){
         World.arModel = new AR.Model(name, {
             scale: {
                x: 0.05,
@@ -43,6 +44,8 @@ var World = {
         World.animation = new AR.ModelAnimation(this.arModel, animationName);
 
         World.resetAnimation = new AR.ModelAnimation(this.arModel, resetAnimationName);
+
+        World.circleAnimation = new AR.ModelAnimation(this.arModel, circleAnimationName);
 
         World.modelSound = new AR.Sound("assets/sounds/rosas.mp3", {
             onError : function(){
@@ -91,7 +94,8 @@ var World = {
                     document.getElementById("fecha-alas-button").style.visibility = "visible";
                     document.getElementById("change-direction-slider-container").style.visibility = "hidden";
                     document.getElementById("angleMessage").style.visibility = "hidden";
-                    document.getElementById("animation-pause-resume-button").style.visibility = "hidden";
+                    document.getElementById("animation-straight-pause-resume-button").style.visibility = "hidden";
+                    document.getElementById("animation-circle-pause-resume-button").style.visibility = "hidden";
                 } else{
                     document.getElementById("tracking-start-stop-button").style.visibility = "visible";
                     document.getElementById("abre-alas-button").style.visibility = "hidden";
@@ -100,7 +104,8 @@ var World = {
                     document.getElementById("distanceMessage").style.visibility = "hidden";
                     document.getElementById("change-direction-slider-container").style.visibility = "visible";
                     document.getElementById("angleMessage").style.visibility = "visible";
-                    document.getElementById("animation-pause-resume-button").style.visibility = "visible";
+                    document.getElementById("animation-straight-pause-resume-button").style.visibility = "visible";
+                    document.getElementById("animation-circle-pause-resume-button").style.visibility = "visible";
                 }
             },
             /*
@@ -122,14 +127,15 @@ var World = {
                 if (World.selectedCar == "abre_alas"){
                     World.createARModel(0.0, 0.0, "assets/models/abre_alas.wt3",
                     "Plataforma01|Carro Andando_Plataforma01_animation",
-                    "Plataforma01|Carro Parado_Plataforma01_animation");
+                    "Plataforma01|Carro Parado_Plataforma01_animation",
+                    "Plataforma01|Carro Girando_Plataforma01_animation");
                 }else{
                     World.createARModel(0.0, 0.0, "assets/models/fecha_alas.wt3",
                     "Base_carro|Carro Andando_Base_carro_animation",
-                    "Base_carro|Carro Parado_Base_carro_animation");
+                    "Base_carro|Carro Parado_Base_carro_animation",
+                    "Base_carro|Carro Girando_Base_carro_animation");
                 }
                 World.addModel();
-                document.getElementById("animation-pause-resume-button").src = "assets/buttons/start.png";
                 World.showUserInstructions("Pressionando o play, o carro começará a andar! Você pode o acompanhar, movendo suavemente o seu dispositivo!");
             },
             onTrackingStopped: function onTrackingStoppedFn() {
@@ -187,14 +193,15 @@ var World = {
         }
     },
 
-    pauseOrResume: function pauseOrResumeFn(){
+    pauseOrResumeStraight: function pauseOrResumeStraightFn(){
         if (World.animation.isRunning()){
             World.animation.pause();
             World.modelSound.pause();
-            document.getElementById("animation-pause-resume-button").src = "assets/buttons/start.png";
+            document.getElementById("animation-straight-pause-resume-button").src = "assets/buttons/continue_button.png";
         }
         else{
             if (!World.animationStarted){
+                document.getElementById("animation-circle-pause-resume-button").style.display = "none";
                 World.animation.start(-1);
                 World.animationStarted = true;
                 World.modelSound.play();
@@ -202,7 +209,27 @@ var World = {
                 World.animation.resume();
                 World.modelSound.resume();
             }
-            document.getElementById("animation-pause-resume-button").src = "assets/buttons/pause.png";
+            document.getElementById("animation-straight-pause-resume-button").src = "assets/buttons/pause.png";
+        }
+    },
+
+    pauseOrResumeCircle: function pauseOrResumeCircleFn(){
+        if (World.circleAnimation.isRunning()){
+            World.circleAnimation.pause();
+            World.modelSound.pause();
+            document.getElementById("animation-circle-pause-resume-button").src = "assets/buttons/continue_button.png";
+        }
+        else{
+            if (!World.animationStarted){
+                document.getElementById("animation-straight-pause-resume-button").style.display = "none";
+                World.circleAnimation.start(-1);
+                World.animationStarted = true;
+                World.modelSound.play();
+            }else{
+                World.circleAnimation.resume();
+                World.modelSound.resume();
+            }
+            document.getElementById("animation-circle-pause-resume-button").src = "assets/buttons/pause.png";
         }
     },
 
@@ -212,6 +239,10 @@ var World = {
             this.instantTrackable.drawables.removeCamDrawable(allCurrentModels);
             allCurrentModels = [];
             World.resetedModels = true;
+            document.getElementById("animation-straight-pause-resume-button").style.display = "initial";
+            document.getElementById("animation-circle-pause-resume-button").style.display = "initial";
+            document.getElementById("animation-circle-pause-resume-button").src = "assets/buttons/start_circle.png";
+            document.getElementById("animation-straight-pause-resume-button").src = "assets/buttons/start_straight.png";
         }
     },
 
