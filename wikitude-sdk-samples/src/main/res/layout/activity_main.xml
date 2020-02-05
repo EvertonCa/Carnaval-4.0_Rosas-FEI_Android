@@ -5,47 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?actionBarSize"
-        android:background="?colorPrimary"
-        android:elevation="4dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </android.support.v7.widget.Toolbar>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#dbdde0"
-        android:orientation="vertical"
+    <ImageView
+        android:id="@+id/backgroundMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/background" />
 
-        <ImageView
-            android:id="@+id/sambodromoPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:contentDescription="Model Preview"
-            android:cropToPadding="false"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/model" />
+    <ImageView
+        android:id="@+id/buttonStart"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:alpha="1"
+        android:onClick="startAR"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backgroundMain"
+        app:srcCompat="@drawable/botao_comecar" />
 
-        <ImageView
-            android:id="@+id/casaPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/model_old" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/feiLogoView"
+        android:layout_width="180dp"
+        android:layout_height="311dp"
+        android:alpha="1"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/backgroundMain"
+        app:srcCompat="@drawable/fei_logo" />
+
+    <ImageView
+        android:id="@+id/rosasLogoView"
+        android:layout_width="100dp"
+        android:layout_height="275dp"
+        android:layout_marginTop="20dp"
+        android:alpha="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backgroundMain"
+        app:srcCompat="@drawable/rosas" />
 
 </android.support.constraint.ConstraintLayout>
