@@ -3,6 +3,8 @@ package com.wikitude.samples;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.common.CallStatus;
@@ -35,16 +38,21 @@ public class StartActivity extends AppCompatActivity {
     private ImageView buttonStart;
     private ImageView rosasLogoView;
     private ImageView feiLogoView;
+    private VideoView backgroundVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(0, 0);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         setContentView(R.layout.activity_main);
         buttonStart = findViewById(R.id.buttonStart);
         rosasLogoView = findViewById(R.id.rosasLogoView);
         feiLogoView = findViewById(R.id.feiLogoView);
+
+        backgroundVideoView = findViewById(R.id.videoView);
+        Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.rosas_background);
+        backgroundVideoView.setVideoURI(uri);
 
         this.getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -56,12 +64,21 @@ public class StartActivity extends AppCompatActivity {
 
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new AccelerateInterpolator());
-        fadeIn.setStartOffset(200);
-        fadeIn.setDuration(1000);
+        fadeIn.setStartOffset(3000);
+        fadeIn.setDuration(3000);
 
         buttonStart.startAnimation(fadeIn);
         rosasLogoView.startAnimation(fadeIn);
         feiLogoView.startAnimation(fadeIn);
+
+        backgroundVideoView.start();
+
+        backgroundVideoView.setOnPreparedListener (new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+            }
+        });
 
         final String json = SampleJsonParser.loadStringFromAssets(this, sampleDefinitionsPath);
         categories = SampleJsonParser.getCategoriesFromJsonString(json);

@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.wikitude.samples.StartActivity" android:theme="@style/AppCompat.TelaCheia"
+            android:name="com.wikitude.samples.StartActivity" android:theme="@style/AppCompat.TelaCheia" android:noHistory="true"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name="com.wikitude.samples.SimpleArActivity"
