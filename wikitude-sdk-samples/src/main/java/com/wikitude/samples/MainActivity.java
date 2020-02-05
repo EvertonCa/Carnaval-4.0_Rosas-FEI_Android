@@ -49,19 +49,19 @@ public class MainActivity extends AppCompatActivity {
         // first 0f, 1f mean scaling from Y-axis to Y-axis, meaning scaling from 0-100%
         // The two 0.5f mean animation will start from 50% of X-axis & 50% of Y-axis, i.e. from center
 
-        final ScaleAnimation scale_up =  new ScaleAnimation(0.5f, 3.5f, 0.5f, 3.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        final ScaleAnimation scale_down =  new ScaleAnimation(3.0f, 0.5f, 3.0f, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scale_down.setDuration(600);     // animation duration in milliseconds
+        scale_down.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        final ScaleAnimation scale_up =  new ScaleAnimation(1.0f, 3.0f, 1.0f, 3.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scale_up.setDuration(700);     // animation duration in milliseconds
         scale_up.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
 
-        final ScaleAnimation scale_down =  new ScaleAnimation(1f, 0.5f, 1f, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        scale_down.setDuration(400);     // animation duration in milliseconds
-        scale_down.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+        final ScaleAnimation scale_up_again =  new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scale_up_again.setDuration(400);     // animation duration in milliseconds
+        scale_up_again.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
 
-        final ScaleAnimation scale_down_again =  new ScaleAnimation(3.5f, 0.0f, 3.5f, 0.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        scale_down_again.setDuration(400);     // animation duration in milliseconds
-        scale_down_again.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
-
-        splashImageView.startAnimation(scale_down);
+        splashImageView.startAnimation(scale_up);
 
         scale_down.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                splashImageView.startAnimation(scale_up);
+                splashImageView.startAnimation(scale_up_again);
             }
 
             @Override
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                splashImageView.startAnimation(scale_down_again);
+                splashImageView.startAnimation(scale_down);
             }
 
             @Override
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        scale_down_again.setAnimationListener(new Animation.AnimationListener() {
+        scale_up_again.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
                 ;
