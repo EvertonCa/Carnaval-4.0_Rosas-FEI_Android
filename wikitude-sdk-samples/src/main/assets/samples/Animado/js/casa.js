@@ -21,9 +21,9 @@ var World = {
     createARModel: function createARModelFn(xpos, ypos, name, animationName, resetAnimationName){
         World.arModel = new AR.Model(name, {
             scale: {
-               x: 0.01,
-               y: 0.01,
-               z: 0.01
+               x: 0.05,
+               y: 0.05,
+               z: 0.05
             },
             translate: {
                x: xpos,
