@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         handle.postDelayed(new Runnable() {
             @Override public void run() {
                 animateImage();
-                //startAR();
             }
         }, 2000);
     }
