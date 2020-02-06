@@ -1,5 +1,11 @@
 var allCurrentModels = [];
 
+var oneFingerGestureAllowed = false;
+
+AR.context.on2FingerGestureStarted = function() {
+        oneFingerGestureAllowed = false;
+};
+
 var World = {
 
     platformAssisstedTrackingSupported: false,
@@ -14,17 +20,20 @@ var World = {
     arModel: null,
     selectedCar: null,
     resetedModels: false,
+    initialScale: 1,
+    modelScale: null,
 
     init: function initFn() {
         AR.hardware.smart.isPlatformAssistedTrackingSupported();
+        World.modelScale = World.initialScale;
     },
 
     createARModel: function createARModelFn(xpos, ypos, name, animationName, resetAnimationName, circleAnimationName){
         World.arModel = new AR.Model(name, {
             scale: {
-               x: 0.05,
-               y: 0.05,
-               z: 0.05
+               x: World.modelScale,
+               y: World.modelScale,
+               z: World.modelScale
             },
             translate: {
                x: xpos,
@@ -33,8 +42,30 @@ var World = {
             rotate: {
                z: World.angleModel
             },
+            onRotationChanged: function(angleInDegrees) {
+                this.rotate.z = World.angleModel - (angleInDegrees);
+            },
+            onRotationEnded: function( angleInDegrees ) {
+                World.angleModel = World.angleModel - (angleInDegrees);
+            },
+            onScaleChanged: function(scale){
+                var tempModelScale = World.modelScale * scale;
+                this.scale = {
+                    x: tempModelScale,
+                    y: tempModelScale,
+                    z: tempModelScale
+                };
+            },
+            onScaleEnded: function( /*scale*/ ) {
+                World.modelScale = this.scale.x;
+            },
+            onDragBegan: function( /*x, y*/ ) {
+                oneFingerGestureAllowed = true;
+            },
             onDragChanged: function(relativeX, relativeY, intersectionX, intersectionY) {
-                this.translate = {x:intersectionX, y:intersectionY};
+                if (oneFingerGestureAllowed){
+                    this.translate = {x:intersectionX, y:intersectionY};
+                }
             },
             onError: World.onError
         });
@@ -92,8 +123,6 @@ var World = {
                     document.getElementById("distanceMessage").style.visibility = "visible";
                     document.getElementById("abre-alas-button").style.visibility = "visible";
                     document.getElementById("fecha-alas-button").style.visibility = "visible";
-                    document.getElementById("change-direction-slider-container").style.visibility = "hidden";
-                    document.getElementById("angleMessage").style.visibility = "hidden";
                     document.getElementById("animation-straight-pause-resume-button").style.visibility = "hidden";
                     document.getElementById("animation-circle-pause-resume-button").style.visibility = "hidden";
                 } else{
@@ -102,8 +131,6 @@ var World = {
                     document.getElementById("fecha-alas-button").style.visibility = "hidden";
                     document.getElementById("tracking-height-slider-container").style.visibility = "hidden";
                     document.getElementById("distanceMessage").style.visibility = "hidden";
-                    document.getElementById("change-direction-slider-container").style.visibility = "visible";
-                    document.getElementById("angleMessage").style.visibility = "visible";
                     document.getElementById("animation-straight-pause-resume-button").style.visibility = "visible";
                     document.getElementById("animation-circle-pause-resume-button").style.visibility = "visible";
                 }
@@ -136,7 +163,7 @@ var World = {
                     "Base_carro|Carro Girando_Base_carro_animation");
                 }
                 World.addModel();
-                World.showUserInstructions("Pressionando o play, o carro começará a andar! Você pode o acompanhar, movendo suavemente o seu dispositivo!");
+                World.showUserInstructions("Escolhendo qual animação você deseja, o carro começará a andar! Você pode o acompanhar, movendo suavemente o seu dispositivo!");
             },
             onTrackingStopped: function onTrackingStoppedFn() {
                 /* Do something when tracking is stopped (lost). */
@@ -179,11 +206,6 @@ var World = {
 
     changeTrackingHeight: function changeTrackingHeightFn(height) {
         World.tracker.deviceHeight = parseFloat(height);
-    },
-
-    changeObjectAngle: function changeObjectAngleFn(angle) {
-        World.angleModel = parseFloat(angle);
-        World.arModel.rotate.z = World.angleModel;
     },
 
     addModel: function addModelFn() {
@@ -243,6 +265,7 @@ var World = {
             document.getElementById("animation-circle-pause-resume-button").style.display = "initial";
             document.getElementById("animation-circle-pause-resume-button").src = "assets/buttons/start_circle.png";
             document.getElementById("animation-straight-pause-resume-button").src = "assets/buttons/start_straight.png";
+            World.modelScale = World.initialScale;
         }
     },
 

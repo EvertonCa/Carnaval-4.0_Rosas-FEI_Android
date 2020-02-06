@@ -32,7 +32,7 @@
         <div class="slider-delete-container">
             <div id="distanceMessage">Distância</div>
             <div id="tracking-height-slider-container">
-                <input id="tracking-height-slider" type="range" min="0.5" value="2.5" max="20.0" step="0.5"
+                <input id="tracking-height-slider" type="range" min="0.5" value="2.5" max="10.0" step="0.1"
                        onchange="World.changeTrackingHeight(value)">
             </div>
         </div>
@@ -48,19 +48,14 @@
                onclick="World.changeTrackerState(id)"/>
         <input id="fecha-alas-button" class="car-button" type="image" src="assets/buttons/fecha_alas.png"
                onclick="World.changeTrackerState(id)"/>
-        <div class="slider-delete-container">
-            <div id="angleMessage" style="visibility: hidden">Ângulo</div>
-            <div id="change-direction-slider-container" style="visibility: hidden">
-                <input id="change-direction-slider" type="range" min="0" value="0" max="360" step="1"
-                       onchange="World.changeObjectAngle(value)">
-            </div>
-        </div>
+        <div class="slider-delete-container"></div>
         <input id="tracking-start-stop-button" class="image-button" type="image" src="assets/buttons/stop.png"
                onclick="World.changeTrackerState(id)" style="visibility: hidden"/>
         <input id="animation-straight-pause-resume-button" class="image-button" type="image" src="assets/buttons/start_straight.png"
                onclick="World.pauseOrResumeStraight()" style="visibility: hidden"/>
         <input id="animation-circle-pause-resume-button" class="image-button" type="image" src="assets/buttons/start_circle.png"
                onclick="World.pauseOrResumeCircle()" style="visibility: hidden"/>
+
     </div>
 </div>
 
