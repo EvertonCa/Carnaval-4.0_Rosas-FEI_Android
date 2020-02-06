@@ -10,26 +10,37 @@
         android:id="@+id/backgroundImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="center"
+        android:contentDescription="@string/todo"
+        android:scaleType="centerCrop"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/background" />
 
     <ImageView
         android:id="@+id/splashImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="314dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:adjustViewBounds="false"
-        android:cropToPadding="true"
+        android:contentDescription="@string/splashImage"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/splash"
-        android:contentDescription="@string/splashImage" />
+        app:srcCompat="@drawable/rosas" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="394dp"
+        android:layout_height="131dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundImageView"
+        app:layout_constraintStart_toStartOf="@+id/backgroundImageView"
+        app:srcCompat="@drawable/title_splash" />
 
 </android.support.constraint.ConstraintLayout>

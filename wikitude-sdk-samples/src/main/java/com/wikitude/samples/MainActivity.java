@@ -49,21 +49,45 @@ public class MainActivity extends AppCompatActivity {
         // first 0f, 1f mean scaling from Y-axis to Y-axis, meaning scaling from 0-100%
         // The two 0.5f mean animation will start from 50% of X-axis & 50% of Y-axis, i.e. from center
 
-        final ScaleAnimation scale_down =  new ScaleAnimation(3.0f, 0.5f, 3.0f, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        scale_down.setDuration(600);     // animation duration in milliseconds
-        scale_down.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+        final ScaleAnimation anim1 =  new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim1.setDuration(200);     // animation duration in milliseconds
+        anim1.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
 
-        final ScaleAnimation scale_up =  new ScaleAnimation(1.0f, 3.0f, 1.0f, 3.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        scale_up.setDuration(700);     // animation duration in milliseconds
-        scale_up.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+        final ScaleAnimation anim2 =  new ScaleAnimation(1.2f, 1.1f, 1.2f, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim2.setDuration(300);     // animation duration in milliseconds
+        anim2.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
 
-        final ScaleAnimation scale_up_again =  new ScaleAnimation(0.5f, 1.0f, 0.5f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        scale_up_again.setDuration(400);     // animation duration in milliseconds
-        scale_up_again.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+        final ScaleAnimation anim3 =  new ScaleAnimation(1.1f, 1.2f, 1.1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim3.setDuration(100);     // animation duration in milliseconds
+        anim3.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
 
-        splashImageView.startAnimation(scale_up);
+        final ScaleAnimation anim4 =  new ScaleAnimation(1.2f, 1.0f, 1.2f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim4.setDuration(300);     // animation duration in milliseconds
+        anim4.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
 
-        scale_down.setAnimationListener(new Animation.AnimationListener() {
+        final ScaleAnimation animPause =  new ScaleAnimation(1.0f, 1.0f, 1.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animPause.setDuration(600);     // animation duration in milliseconds
+        animPause.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        final ScaleAnimation anim5 =  new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim5.setDuration(200);     // animation duration in milliseconds
+        anim5.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        final ScaleAnimation anim6 =  new ScaleAnimation(1.2f, 1.1f, 1.2f, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim6.setDuration(300);     // animation duration in milliseconds
+        anim6.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        final ScaleAnimation anim7 =  new ScaleAnimation(1.1f, 1.2f, 1.1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim7.setDuration(100);     // animation duration in milliseconds
+        anim7.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        final ScaleAnimation anim8 =  new ScaleAnimation(1.2f, 1.0f, 1.2f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim8.setDuration(300);     // animation duration in milliseconds
+        anim8.setFillAfter(true);    // If fillAfter is true, the transformation that this animation performed will persist when it is finished.
+
+        splashImageView.startAnimation(anim1);
+
+        anim1.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
                 ;
@@ -71,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                splashImageView.startAnimation(scale_up_again);
+                splashImageView.startAnimation(anim2);
             }
 
             @Override
@@ -80,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        scale_up.setAnimationListener(new Animation.AnimationListener() {
+        anim2.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
                 ;
@@ -88,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                splashImageView.startAnimation(scale_down);
+                splashImageView.startAnimation(anim3);
             }
 
             @Override
@@ -97,7 +121,109 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        scale_up_again.setAnimationListener(new Animation.AnimationListener() {
+        anim3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                splashImageView.startAnimation(anim4);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
+
+        anim4.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                splashImageView.startAnimation(animPause);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
+
+        animPause.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                splashImageView.startAnimation(anim5);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
+
+        anim5.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                splashImageView.startAnimation(anim6);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
+
+        anim6.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                splashImageView.startAnimation(anim7);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
+
+        anim7.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ;
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                splashImageView.startAnimation(anim8);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                ;
+            }
+        });
+
+        anim8.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
                 ;
