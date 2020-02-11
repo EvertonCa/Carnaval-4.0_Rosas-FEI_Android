@@ -39,6 +39,9 @@ public class StartActivity extends AppCompatActivity {
     private ImageView rosasLogoView;
     private ImageView feiLogoView;
     private VideoView backgroundVideoView;
+    private ImageView cadCar;
+    private ImageView rosasFei;
+    private ImageView labelKnowMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class StartActivity extends AppCompatActivity {
         buttonStart = findViewById(R.id.buttonStart);
         rosasLogoView = findViewById(R.id.rosasLogoView);
         feiLogoView = findViewById(R.id.feiLogoView);
+        cadCar = findViewById(R.id.CadCar);
+        rosasFei = findViewById(R.id.RosasFei);
+        labelKnowMore = findViewById(R.id.knowMore);
 
         backgroundVideoView = findViewById(R.id.videoView);
         Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.rosas_background);
@@ -70,6 +76,9 @@ public class StartActivity extends AppCompatActivity {
         buttonStart.startAnimation(fadeIn);
         rosasLogoView.startAnimation(fadeIn);
         feiLogoView.startAnimation(fadeIn);
+        cadCar.startAnimation(fadeIn);
+        rosasFei.startAnimation(fadeIn);
+        labelKnowMore.startAnimation(fadeIn);
 
         backgroundVideoView.start();
 
@@ -136,6 +145,21 @@ public class StartActivity extends AppCompatActivity {
             });
         }
         return false;
+    }
+
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.CadCar)
+        {
+            //handle the click events here, in this case open www.google.com with the default browser
+            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.youtube.com/watch?v=9eFNBqpfdvY")));
+        }
+        else
+        {
+            //handle the click events here, in this case open www.google.com with the default browser
+            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.youtube.com/watch?v=oRSXQ2jU0ak")));
+        }
+
     }
 
     @Override

@@ -18,19 +18,19 @@
         android:id="@+id/buttonStart"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:layout_marginTop="30dp"
         android:alpha="1"
         android:onClick="startAR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/videoView"
+        app:layout_constraintStart_toStartOf="@+id/videoView"
+        app:layout_constraintTop_toBottomOf="@+id/rosasLogoView"
         app:srcCompat="@drawable/botao_comecar" />
 
     <ImageView
         android:id="@+id/feiLogoView"
-        android:layout_width="180dp"
-        android:layout_height="311dp"
+        android:layout_width="233dp"
+        android:layout_height="147dp"
+        android:layout_marginBottom="20dp"
         android:alpha="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,12 +39,43 @@
 
     <ImageView
         android:id="@+id/rosasLogoView"
-        android:layout_width="100dp"
-        android:layout_height="275dp"
+        android:layout_width="189dp"
+        android:layout_height="199dp"
+        android:layout_marginTop="50dp"
         android:alpha="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rosas" />
+
+    <ImageView
+        android:id="@+id/knowMore"
+        android:layout_width="311dp"
+        android:layout_height="88dp"
+        app:layout_constraintEnd_toEndOf="@+id/videoView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStart"
+        app:srcCompat="@drawable/know_more" />
+
+    <ImageView
+        android:id="@+id/CadCar"
+        android:layout_width="147dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        android:onClick="onClick"
+        app:layout_constraintStart_toStartOf="@+id/videoView"
+        app:layout_constraintTop_toBottomOf="@+id/knowMore"
+        app:srcCompat="@drawable/cad_car_button" />
+
+    <ImageView
+        android:id="@+id/RosasFei"
+        android:layout_width="160dp"
+        android:layout_height="84dp"
+        android:layout_marginEnd="36dp"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toEndOf="@+id/videoView"
+        app:layout_constraintTop_toBottomOf="@+id/knowMore"
+        app:srcCompat="@drawable/rosas_fei_button" />
 
 </android.support.constraint.ConstraintLayout>
